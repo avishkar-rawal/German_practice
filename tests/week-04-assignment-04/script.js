@@ -8,7 +8,7 @@ const $ = id => document.getElementById(id);
 const normal = value => String(value || '').trim().toLocaleLowerCase('de-DE').replace(/\s+/g, ' ');
 const accepted = answer => Array.isArray(answer) ? answer.map(normal) : String(answer).split('/').map(normal);
 const correct = q => accepted(q.answer).includes(normal(state.answers[q.id]));
-const imagePath = name => name ? `tests/week-04-assignment-04/assets/${name}` : '';
+const imagePath = name => name ? `assets/${name}` : '';
 
 function save() {
   localStorage.setItem('german-week4-answers', JSON.stringify(state.answers));

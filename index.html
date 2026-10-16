@@ -3,49 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>German I — Week 4 Assignment 4</title>
-  <link rel="stylesheet" href="style.css">
+  <title>German I — Assignment Practice</title>
+  <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-  <div class="app">
-    <header class="site-header">
-      <div class="eyebrow">NPTEL · German I</div>
-      <h1>Week 4: Assignment 4</h1>
-      <p class="subtitle">Practice the original assignment, including its listening sections.</p>
-      <div class="mode-picker" id="modePicker">
-        <button class="mode-toggle" id="modeToggle" aria-expanded="true">Mode: <strong id="modeLabel">Exam</strong><span aria-hidden="true">⌃</span></button>
-        <div class="mode-switch" id="modeSwitch" role="tablist" aria-label="Quiz mode">
-          <button class="active" data-mode="exam">Exam mode</button>
-          <button data-mode="practice">Practice mode</button>
+  <div class="landing">
+    <header class="landing-header">
+      <div class="eyebrow">German I · Assignment practice</div>
+      <h1>Choose your assignment</h1>
+      <p>Work through the NPTEL German I assignments week by week. Select an available assignment to begin.</p>
+    </header>
+    <main>
+      <div class="week-grid">
+        <div class="week-card">
+          <span class="week-number">01</span><span class="week-copy"><strong>Week 1</strong><small>Assignment 1</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">02</span><span class="week-copy"><strong>Week 2</strong><small>Assignment 2</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">03</span><span class="week-copy"><strong>Week 3</strong><small>Assignment 3</small><em>Coming soon</em></span>
+        </div>
+        <a class="week-card available" href="tests/week-04-assignment-04/index.html">
+          <span class="week-number">04</span>
+          <span class="week-copy"><strong>Week 4</strong><small>Assignment 4</small><em>Available now</em></span>
+          <span class="arrow">→</span>
+        </a>
+        <div class="week-card">
+          <span class="week-number">05</span><span class="week-copy"><strong>Week 5</strong><small>Assignment 5</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">06</span><span class="week-copy"><strong>Week 6</strong><small>Assignment 6</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">07</span><span class="week-copy"><strong>Week 7</strong><small>Assignment 7</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">08</span><span class="week-copy"><strong>Week 8</strong><small>Assignment 8</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">09</span><span class="week-copy"><strong>Week 9</strong><small>Assignment 9</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">10</span><span class="week-copy"><strong>Week 10</strong><small>Assignment 10</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">11</span><span class="week-copy"><strong>Week 11</strong><small>Assignment 11</small><em>Coming soon</em></span>
+        </div>
+        <div class="week-card">
+          <span class="week-number">12</span><span class="week-copy"><strong>Week 12</strong><small>Assignment 12</small><em>Coming soon</em></span>
         </div>
       </div>
-    </header>
-    <main class="layout" id="quizView">
-      <section class="card question-card">
-        <div class="question-meta"><span id="sectionLabel"></span><strong id="progressLabel"></strong><b id="marksLabel"></b></div>
-        <div class="progress"><span id="progressBar"></span></div>
-        <h2 id="questionTitle"></h2>
-        <img id="sourceImage" class="source-image" alt="">
-        <p id="prompt" class="prompt"></p>
-        <a id="audioLink" class="audio-link" target="_blank" rel="noreferrer">Open the original listening audio ↗</a>
-        <div id="answerArea"></div>
-        <div id="feedback" class="feedback" hidden></div>
-        <div class="nav"><button class="secondary" id="previousButton">← Previous</button><button class="primary" id="nextButton">Next →</button></div>
-      </section>
-      <aside class="card navigator" id="navigator">
-        <button class="navigator-toggle" id="navigatorToggle" aria-expanded="true">
-          <span><strong>Question navigator</strong><small id="answeredCount"></small></span><b aria-hidden="true">⌃</b>
-        </button>
-        <div id="navigatorBody">
-          <div class="question-grid" id="questionGrid"></div>
-          <div class="legend"><span><i class="dot current-dot"></i>Current</span><span><i class="dot answered-dot"></i>Answered</span></div>
-          <div class="notice"><b>All 88 questions included</b><br>Questions 27–36 open the original public listening links.</div>
-        </div>
-      </aside>
     </main>
-    <main class="card results" id="resultsView" hidden></main>
+    <footer>German I · NPTEL assignment practice</footer>
   </div>
-  <script src="tests/week-04-assignment-04/questions.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
