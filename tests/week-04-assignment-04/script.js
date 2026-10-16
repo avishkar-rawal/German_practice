@@ -72,6 +72,16 @@ $('modeToggle').addEventListener('click', () => {
   $('modeSwitch').hidden = open;
   $('modeToggle').lastElementChild.textContent = open ? '⌄' : '⌃';
 });
+$('backToAssignments').addEventListener('click', () => {
+  $('leaveDialog').hidden = false;
+  $('cancelLeave').focus();
+});
+$('cancelLeave').addEventListener('click', () => {
+  $('leaveDialog').hidden = true;
+});
+$('confirmLeave').addEventListener('click', () => {
+  window.location.href = '../../index.html';
+});
 $('navigatorToggle').addEventListener('click', () => {
   const open = $('navigatorToggle').getAttribute('aria-expanded') === 'true';
   $('navigatorToggle').setAttribute('aria-expanded', String(!open));

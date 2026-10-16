@@ -9,6 +9,7 @@
 <body>
   <div class="app">
     <header class="site-header">
+      <button class="back-link" id="backToAssignments">← All assignments</button>
       <div class="eyebrow">NPTEL · German I</div>
       <h1>Week 4: Assignment 4</h1>
       <p class="subtitle">Practice the original assignment, including its listening sections.</p>
@@ -44,6 +45,16 @@
       </aside>
     </main>
     <main class="card results" id="resultsView" hidden></main>
+  </div>
+  <div class="confirm-overlay" id="leaveDialog" hidden>
+    <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="leaveTitle">
+      <h2 id="leaveTitle">Return to assignments?</h2>
+      <p>Your answers are saved in this browser, but the current quiz page will close.</p>
+      <div class="confirm-actions">
+        <button class="secondary" id="cancelLeave">No, stay here</button>
+        <button class="primary" id="confirmLeave">Yes, go back</button>
+      </div>
+    </div>
   </div>
   <script src="questions.js"></script>
   <script src="script.js"></script>
