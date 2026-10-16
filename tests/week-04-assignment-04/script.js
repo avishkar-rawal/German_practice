@@ -9,6 +9,22 @@ const normal = value => String(value || '').trim().toLocaleLowerCase('de-DE').re
 const accepted = answer => Array.isArray(answer) ? answer.map(normal) : String(answer).split('/').map(normal);
 const correct = q => accepted(q.answer).includes(normal(state.answers[q.id]));
 const imagePath = name => name ? `assets/${name}` : '';
+const instructions = {
+  'Personal information and vocabulary': 'Fill in the form. Write only one word for each blank.',
+  'Verb conjugation': 'Write the verbs in the correctly conjugated form.',
+  Matching: 'Match the following. Type only the corresponding letter, not the sentence.',
+  'Verb selection': 'Which verb is appropriate for which sentence? Write only the corresponding letter.',
+  'Hobbies and activities': 'What do the people like to do? Write the verbs in correctly conjugated form.',
+  'Sentence ordering': 'Bring the jumbled sentences into proper order.',
+  Listening: 'Listen to the information and enter the answer exactly as requested in the original exercise.',
+  'Strong verbs': 'Choose the correct complete conjugation.',
+  'Possessive pronouns': 'Fill in the possessive pronoun for each sentence.',
+  'Vocabulary categorisation': 'Which word fits into which row? Write only the corresponding letter.',
+  'Sentence matching': 'Match each sentence with the corresponding letter.',
+  'Word-bank completion': 'Complete the sentences using the words from the word bank.',
+  'Reading comprehension': 'Read the text and answer each question.',
+  'Household devices and objects': 'Choose the correct option for each box.'
+};
 
 function save() {
   localStorage.setItem('german-week4-answers', JSON.stringify(state.answers));
@@ -25,10 +41,14 @@ function render() {
   $('marksLabel').textContent = `${q.marks} ${q.marks === 1 ? 'mark' : 'marks'}`;
   $('progressBar').style.width = `${((state.index + 1) / questions.length) * 100}%`;
   $('questionTitle').textContent = `Original item ${q.id}`;
+  $('instruction').textContent = instructions[q.section] || '';
   const image = $('sourceImage');
   image.src = imagePath(q.image);
   image.alt = `Original assignment source for question ${q.id}`;
   image.hidden = !q.image;
+  const imageLink = $('sourceImageLink');
+  imageLink.hidden = !q.image;
+  imageLink.href = imagePath(q.image);
   $('prompt').textContent = q.prompt;
   const audio = $('audioLink');
   audio.hidden = !q.audio;
@@ -38,6 +58,19 @@ function render() {
     : `<select class="answer-input" id="answerInput"><option value="">Choose an answer…</option>${q.options.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join('')}</select>`;
   if (q.type !== 'text') $('answerInput').value = state.answers[q.id] || '';
   $('answerInput').addEventListener('input', e => { state.answers[q.id] = e.target.value; save(); renderGrid(); });
+  const practiceControls = $('practiceControls');
+  practiceControls.innerHTML = '';
+  if (state.mode === 'practice') {
+    const button = document.createElement('button');
+    button.className = 'primary small';
+    button.id = 'checkButton';
+    button.textContent = 'Check answer';
+    button.addEventListener('click', () => {
+      state.practice[q.id] = true;
+      showFeedback(q);
+    });
+    practiceControls.append(button);
+  }
   $('feedback').hidden = true;
   if (state.mode === 'practice' && state.practice[q.id]) showFeedback(q);
   $('previousButton').disabled = state.index === 0;
@@ -101,20 +134,4 @@ $('nextButton').addEventListener('click', () => {
     if (confirm('Submit your answers now? You will see your score and corrections.')) showResults();
   } else { state.index++; render(); }
 });
-$('feedback').addEventListener('click', event => {
-  if (event.target.id === 'checkButton') { state.practice[questions[state.index].id] = true; showFeedback(questions[state.index]); }
-});
-const originalRender = render;
-function renderWithPractice() {
-  originalRender();
-  if (state.mode === 'practice') {
-    const button = document.createElement('button');
-    button.className = 'primary small';
-    button.id = 'checkButton';
-    button.textContent = 'Check answer';
-    $('answerArea').after(button);
-    button.addEventListener('click', () => { state.practice[questions[state.index].id] = true; showFeedback(questions[state.index]); });
-  }
-}
-render = renderWithPractice;
 render();
