@@ -12,18 +12,19 @@ const imagePath = name => name ? `assets/${name}` : '';
 const instructions = {
   'Personal information and vocabulary': 'Fill in the form. Write only one word for each blank.',
   'Verb conjugation': 'Write the verbs in the correctly conjugated form.',
-  Matching: 'Match the following. Type only the corresponding letter, not the sentence.',
-  'Verb selection': 'Which verb is appropriate for which sentence? Write only the corresponding letter.',
+  Matching: 'Match the following:\nType in ONLY the corresponding letters(a, b, c, d, or e) NOT the sentences.',
+  'Verb selection': 'Which verb is appropriate for which sentence? Write ONLY the corresponding letter in the answer box: A, B, D, or E. DO NOT write/type in the words.',
   'Hobbies and activities': 'What do the people like to do? Write the verbs in correctly conjugated form.',
-  'Sentence ordering': 'Bring the jumbled sentences into proper order.',
-  Listening: 'Listen to the information and enter the answer exactly as requested in the original exercise.',
-  'Strong verbs': 'Choose the correct complete conjugation.',
-  'Possessive pronouns': 'Fill in the possessive pronoun for each sentence.',
-  'Vocabulary categorisation': 'Which word fits into which row? Write only the corresponding letter.',
-  'Sentence matching': 'Match each sentence with the corresponding letter.',
-  'Word-bank completion': 'Complete the sentences using the words from the word bank.',
-  'Reading comprehension': 'Read the text and answer each question.',
-  'Household devices and objects': 'Choose the correct option for each box.'
+  'Sentence ordering': 'Instructions: Bring the jumbled sentences into proper order.',
+  Listening: 'Listen to the Information about phone numbers and write the numbers WITHOUT any spaces between the numbers.',
+  'Regular verb conjugation': 'Choose the correct verb and complete the sentences. Pay attention to the subject and verb conjugation: 0.5 Points for each answer.',
+  'Strong verbs': 'Choose the correct conjugation for the following irregular verbs.\nKonjugieren Sie die folgenden starken Verben.',
+  'Possessive pronouns': 'Fill in the blanks with appropriate possessive pronouns (for the underlined words) with correct endings.',
+  'Vocabulary categorisation': 'Which word fits into which row? (Use dictionary (www.leo.org) if needed)\nWrite ONLY the corresponding letter in the answer box: A, B, D, or E. DO NOT write/type in the words.',
+  'Sentence matching': 'Match the two columns to make small complete sentences. Write ONLY the corresponding letter in the answer box: A, B, D, or E. DO NOT write/type in the words.',
+  'Word-bank completion': 'Fill in the blanks with the words given in the box.',
+  'Reading comprehension': 'Read the text. In which section (A-E) would you find the answer to which question (1-5)?',
+  'Household devices and objects': 'Which device does what? Choose the correct option for each box: a, b or c'
 };
 
 function save() {
@@ -41,7 +42,7 @@ function render() {
   $('marksLabel').textContent = `${q.marks} ${q.marks === 1 ? 'mark' : 'marks'}`;
   $('progressBar').style.width = `${((state.index + 1) / questions.length) * 100}%`;
   $('questionTitle').textContent = `Original item ${q.id}`;
-  $('instruction').textContent = instructions[q.section] || '';
+  $('instruction').textContent = q.instruction || instructions[q.section] || '';
   const image = $('sourceImage');
   image.src = imagePath(q.image);
   image.alt = `Original assignment source for question ${q.id}`;

@@ -1,17 +1,20 @@
-const textGroup = (start, section, answers, prompt, image, explanation = '') =>
-  answers.map((answer, i) => ({ id: start + i, section, type: 'text', answer, prompt: `${prompt} ${i + 1}.`, marks: .5, image, explanation }));
+const textGroup = (start, section, answers, prompt, image, explanation = '', labels = null) =>
+  answers.map((answer, i) => ({ id: start + i, section, type: 'text', answer, prompt: `${prompt} ${labels ? labels[i] : i + 1}.`, marks: .5, image, explanation }));
 const choice = (id, section, answer, prompt, options, image, marks = 1) =>
   ({ id, section, type: 'choice', answer, prompt, options, image, marks });
 const select = (id, section, answer, prompt, options, image, marks = 1) =>
   ({ id, section, type: 'select', answer, prompt, options, image, marks });
 const listening = (id, answer, prompt, image, audio) =>
-  ({ id, section: 'Listening', type: 'text', answer, prompt, image, audio, marks: 1 });
+  ({ id, section: 'Listening', type: 'text', answer, prompt, image, audio, marks: 1,
+    instruction: id < 33
+      ? 'Listen to the Information about phone numbers and write the numbers WITHOUT any spaces between the numbers.'
+      : 'Listen to the audio and match the people with places, as shown in the example.' });
 
 const questions = [
-  ...textGroup(1, 'Personal information and vocabulary', ['Schurig', 'Köln/Koeln', 'Taxifahrerin', 'schwimmen/schwimmt'], 'Fill in the form with one word for blank', 'W4Q1.png', 'Type the German word exactly as it appears in the form.'),
+  ...textGroup(1, 'Personal information and vocabulary', ['Schurig', 'Köln/Koeln', 'Taxifahrerin', 'schwimmen/schwimmt'], 'Fill in the form. Write only one word for blank', 'W4Q1.png', 'Type the German word exactly as it appears in the form.', [1, 3, 4, 5]),
   ...textGroup(5, 'Verb conjugation', ['Bist', 'liest', 'Hast', 'arbeitet', 'reisen'], 'Write the correctly conjugated verb for item', 'W4Q2.png', 'German verbs change their ending to agree with the subject.'),
-  ...textGroup(10, 'Matching', ['E', 'A', 'D', 'B', 'C'], 'Match item', 'W4Q3.png'),
-  ...textGroup(15, 'Verb selection', ['B', 'E', 'F', 'A', 'C', 'D'], 'Choose the appropriate verb for sentence', 'W4Q4.png'),
+  ...textGroup(10, 'Matching', ['E', 'A', 'D', 'B', 'C'], 'Match item', 'W4Q3.png', '', [1, 2, 3, 4, 5]),
+  ...textGroup(15, 'Verb selection', ['B', 'E', 'F', 'A', 'C', 'D'], 'Choose the appropriate verb for sentence', 'W4Q4.png', '', [1, 2, 3, 4, 5, 6]),
   ...textGroup(21, 'Hobbies and activities', ['lernt', 'fotografiert', 'singt', 'tanzen'], 'Write the correctly conjugated verb for item', 'W4Q5.png'),
   choice(25, 'Sentence ordering', 'bca', 'Bring the jumbled sentence in item 2 into proper order. The example is “bca”.', ['abc', 'cba', 'bca'], 'W4Q6.png'),
   choice(26, 'Sentence ordering', 'cba', 'Bring the jumbled sentence in item 3 into proper order.', ['cba', 'abc'], 'W4Q6.png'),
@@ -30,7 +33,7 @@ const questions = [
     ['wohnst', ['wohnt', 'wohnen', 'wohnst']], ['sprichst', ['sprichst', 'spreche', 'sprechen']], ['wohnen', ['wohnt', 'wohnen', 'wohnst']],
     ['spricht', ['spricht', 'spreche', 'sprechen']], ['wohnt', ['wohnt', 'wohnen', 'wohnst']], ['liest', ['Lest', 'liest', 'lesen']],
     ['sprechen', ['sprichst', 'spreche', 'sprechen']], ['Lest', ['Lest', 'liest', 'lesen']], ['wohnen', ['wohnt', 'wohnen', 'wohnst']], ['kochen', ['kocht', 'koche', 'kochen']]
-  ].map((item, i) => select(i + 37, 'Verb conjugation', item[0], `Choose the correct conjugation for item ${i + 1}.`, item[1], 'W4Q9.png', .5)),
+  ].map((item, i) => select(i + 37, 'Regular verb conjugation', item[0], `Choose the correct conjugation for item ${i + 1}.`, item[1], 'W4Q9.png', .5)),
   select(50, 'Strong verbs', 'gebe-gibst-gibt-geben-gebt-geben', 'Choose the complete correct conjugation of geben.', ['gebe-gibst-gibt-geben-gebt-geben', 'gebst-gibt-gibe-geben-gebt-geben', 'gebe-gibst-gibt-geben-gebt-geben'], 'W4Q10.1.png'),
   select(51, 'Strong verbs', 'habe-hast-hat-haben-habt-haben', 'Choose the complete correct conjugation of haben.', ['habe-hast-hat-haben-habt-haben', 'habe-habst-habt-haben-habt-haben', 'habe-hast-hat-haben-hat-haben'], 'W4Q10.2.png'),
   select(52, 'Strong verbs', 'nehme-nimmst-nimmt-nehmen-nehmt-nehmen', 'Choose the complete correct conjugation of nehmen.', ['nehme-nihmst-nihmt-nehmen-nihmt-nehmen', 'nehme-nimmst-nimmt-nehmen-nehmt-nehmen', 'nehme-nihmst-nihmt-nehmen-nihmt-nehmen'], 'W4Q10.3.png'),
