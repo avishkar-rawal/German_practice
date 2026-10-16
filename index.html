@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>German I — Week 4 Assignment 4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <div class="eyebrow">NPTEL · German I</div>
+      <h1>Week 4: Assignment 4</h1>
+      <p class="subtitle">Practice the original assignment, including its listening sections.</p>
+      <div class="mode-picker" id="modePicker">
+        <button class="mode-toggle" id="modeToggle" aria-expanded="true">Mode: <strong id="modeLabel">Exam</strong><span aria-hidden="true">⌃</span></button>
+        <div class="mode-switch" id="modeSwitch" role="tablist" aria-label="Quiz mode">
+          <button class="active" data-mode="exam">Exam mode</button>
+          <button data-mode="practice">Practice mode</button>
+        </div>
+      </div>
+    </header>
+    <main class="layout" id="quizView">
+      <section class="card question-card">
+        <div class="question-meta"><span id="sectionLabel"></span><strong id="progressLabel"></strong><b id="marksLabel"></b></div>
+        <div class="progress"><span id="progressBar"></span></div>
+        <h2 id="questionTitle"></h2>
+        <img id="sourceImage" class="source-image" alt="">
+        <p id="prompt" class="prompt"></p>
+        <a id="audioLink" class="audio-link" target="_blank" rel="noreferrer">Open the original listening audio ↗</a>
+        <div id="answerArea"></div>
+        <div id="feedback" class="feedback" hidden></div>
+        <div class="nav"><button class="secondary" id="previousButton">← Previous</button><button class="primary" id="nextButton">Next →</button></div>
+      </section>
+      <aside class="card navigator" id="navigator">
+        <button class="navigator-toggle" id="navigatorToggle" aria-expanded="true">
+          <span><strong>Question navigator</strong><small id="answeredCount"></small></span><b aria-hidden="true">⌃</b>
+        </button>
+        <div id="navigatorBody">
+          <div class="question-grid" id="questionGrid"></div>
+          <div class="legend"><span><i class="dot current-dot"></i>Current</span><span><i class="dot answered-dot"></i>Answered</span></div>
+          <div class="notice"><b>All 88 questions included</b><br>Questions 27–36 open the original public listening links.</div>
+        </div>
+      </aside>
+    </main>
+    <main class="card results" id="resultsView" hidden></main>
+  </div>
+  <script src="tests/week-04-assignment-04/questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
