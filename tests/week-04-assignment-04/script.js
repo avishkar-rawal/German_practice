@@ -50,6 +50,13 @@ function render() {
   const imageLink = $('sourceImageLink');
   imageLink.hidden = !q.image;
   imageLink.href = imagePath(q.image);
+  const secondaryImage = $('sourceImageSecondary');
+  const secondaryImageLink = $('sourceImageSecondaryLink');
+  secondaryImage.src = imagePath(q.companionImage);
+  secondaryImage.alt = q.companionImage ? `Companion original assignment source for question ${q.id}` : '';
+  secondaryImage.hidden = !q.companionImage;
+  secondaryImageLink.hidden = !q.companionImage;
+  secondaryImageLink.href = imagePath(q.companionImage);
   $('prompt').textContent = q.prompt;
   const audio = $('audioLink');
   audio.hidden = !q.audio;

@@ -6,6 +6,7 @@ const select = (id, section, answer, prompt, options, image, marks = 1) =>
   ({ id, section, type: 'select', answer, prompt, options, image, marks });
 const listening = (id, answer, prompt, image, audio) =>
   ({ id, section: 'Listening', type: 'text', answer, prompt, image, audio, marks: 1,
+    companionImage: id < 33 ? 'W4Q7.2.png' : '',
     instruction: id < 33
       ? 'Listen to the Information about phone numbers and write the numbers WITHOUT any spaces between the numbers.'
       : 'Listen to the audio and match the people with places, as shown in the example.' });
