@@ -1,25 +1,69 @@
-# German I — Week 4 Assignment 4
+# German I Assignment Practice
 
-This is a static vanilla HTML, CSS, and JavaScript assignment-practice site. It has no React, build step, backend, database, or paid service dependency.
+Website: [https://avishkar-rawal.github.io/German_practice/](https://avishkar-rawal.github.io/German_practice/)
 
-The root [index.html](./index.html) is the landing page. The Week 4 test is separated under [`tests/week-04-assignment-04/`](./tests/week-04-assignment-04/). Put future tests in their own `tests/week-XX-assignment-YY/` folders with their own page, question data, and assets.
+## What this website is
 
-## Run locally
+This is a small, unofficial study tool for practising questions from past German I assignments.
 
-Open `index.html` in a browser, or serve this folder with any static web server.
+It lets a learner:
 
-## Publish with GitHub Pages
+- choose an available assignment;
+- answer one question at a time;
+- use Exam Mode or Practice Mode;
+- move between questions;
+- save answers in the browser;
+- receive a score after submitting; and
+- review answers while studying.
 
-1. Create a GitHub repository named `german-assignments`.
-2. Upload `index.html`, `landing.css`, `tests/`, and `.github/`.
-3. Use the `main` branch.
-4. In **Settings → Pages**, choose **GitHub Actions**.
-5. The included workflow publishes the repository as a static site.
+The website is for personal learning and revision. It is not an official examination, course page, answer-submission system, or replacement for the original course.
 
-The site URL will be:
+## Important notice
+
+- This project is not affiliated with, sponsored by, or endorsed by NPTEL, SWAYAM, or any course provider.
+- The assignments are from past course material and are presented here only as a practice interface.
+- The project does not claim ownership of third-party questions, images, audio, names, or trademarks.
+- Original content remains with its respective copyright owners.
+- The site does not collect registrations, passwords, payment details, or personal information.
+- Answers and progress are stored only in the visitor's own browser using local storage.
+- Audio links, where shown, go to third-party public URLs. The audio is not hosted by this project.
+- Questions, answers, marks, and images may contain mistakes. Always use the official course source for authoritative information.
+
+If you own content shown here and would like it corrected or removed, please contact the repository owner through the GitHub repository. A removal or correction request will be reviewed promptly.
+
+## How to use it
+
+1. Open the website.
+2. Choose an available week and assignment.
+3. Select **Exam Mode** to complete the test before seeing feedback.
+4. Select **Practice Mode** to receive feedback after trying a question.
+5. Use **Previous**, **Next**, or the question navigator to move around.
+6. Submit the assignment when you are finished.
+
+## Run it on your computer
+
+This is a static website. It uses plain HTML, CSS, and JavaScript. It does not require React, a database, or a server.
+
+Open the root `index.html` file in a browser, or serve the folder with any local static web server.
+
+## Project structure
 
 ```text
-https://YOUR-USERNAME.github.io/german-assignments/
+index.html                         Assignment-selection page
+landing.css                        Landing-page styles
+tests/week-04-assignment-04/       Week 4 practice test
+  index.html                        Test page
+  questions.js                      Question data
+  script.js                         Quiz behaviour
+  style.css                         Test styles
+  assets/                           Local question images
+.github/workflows/deploy.yml        GitHub Pages deployment
 ```
 
-The app includes all 88 Week 4 questions in order, local copies of the source images, the original public listening links for questions 27–36, exam mode, practice mode, a collapsible mode selector, answer persistence, automatic grading, and an answer review screen.
+Future assignments can be added in separate folders under `tests/`.
+
+## GitHub Pages
+
+The included GitHub Actions workflow publishes the repository as a static GitHub Pages site. After pushing changes to the main branch, GitHub can deploy the updated files automatically.
+
+This project is intended to remain a simple educational practice website, not a redistribution service or an official course platform.
