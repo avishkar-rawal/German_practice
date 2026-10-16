@@ -14,12 +14,13 @@
       <h1>Week 4: Assignment 4</h1>
       <p class="subtitle">Practice the original assignment, including its listening sections.</p>
       <div class="mode-picker" id="modePicker">
-        <button class="mode-toggle" id="modeToggle" aria-expanded="true">Mode: <strong id="modeLabel">Exam</strong><span aria-hidden="true">⌃</span></button>
+        <button class="mode-toggle" id="modeToggle" aria-expanded="true">Mode: <strong id="modeLabel">Practice</strong><span aria-hidden="true">⌃</span></button>
         <div class="mode-switch" id="modeSwitch" role="tablist" aria-label="Quiz mode">
-          <button class="active" data-mode="exam">Exam mode</button>
-          <button data-mode="practice">Practice mode</button>
+          <button data-mode="exam">Exam mode</button>
+          <button class="active" data-mode="practice">Practice mode</button>
         </div>
       </div>
+      <button class="reset-button" id="resetQuiz">Start over</button>
     </header>
     <main class="layout" id="quizView">
       <section class="card question-card">
@@ -58,6 +59,16 @@
       <div class="confirm-actions">
         <button class="secondary" id="cancelLeave">No, stay here</button>
         <button class="primary" id="confirmLeave">Yes, go back</button>
+      </div>
+    </div>
+  </div>
+  <div class="confirm-overlay" id="resetDialog" hidden>
+    <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+      <h2 id="resetTitle">Start the quiz over?</h2>
+      <p>This will permanently remove all saved answers for this assignment from this browser.</p>
+      <div class="confirm-actions">
+        <button class="secondary" id="cancelReset">No, keep my answers</button>
+        <button class="primary" id="confirmReset">Yes, clear answers</button>
       </div>
     </div>
   </div>

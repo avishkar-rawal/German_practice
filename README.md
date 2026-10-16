@@ -38,7 +38,8 @@ If you own content shown here and would like it corrected or removed, please con
 3. Select **Exam Mode** to complete the test before seeing feedback.
 4. Select **Practice Mode** to receive feedback after trying a question.
 5. Use **Previous**, **Next**, or the question navigator to move around.
-6. Submit the assignment when you are finished.
+6. Select **Start over** if you want to remove all saved answers and begin again. The site asks for confirmation first.
+7. Submit the assignment when you are finished.
 
 ## Run it on your computer
 

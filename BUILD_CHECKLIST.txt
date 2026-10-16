@@ -44,10 +44,13 @@ Use this checklist before creating another week's quiz.
 5. ORIGINAL IMAGES AND ASSETS
 - Download the correct source images.
 - Check that every image belongs to the correct section.
+- Check whether a question uses more than one image, including maps, diagrams, answer sheets, or companion images.
+- Display every required image, not only the first image listed in the source.
+- Give each important image a useful alt text and a full-size link where useful.
 - Store images inside that week's folder.
 - Check that images are not cropped or hidden.
 - Add a full-size image link where useful.
-- Verify that every referenced image loads.
+- Verify that every referenced image loads on the question where it is used.
 
 6. LISTENING QUESTIONS
 - Confirm the original audio link for every listening section.
@@ -68,6 +71,7 @@ Use this checklist before creating another week's quiz.
 - Confirm that marks match the original assignment.
 
 8. QUIZ BEHAVIOR
+- Open in Practice Mode by default unless the assignment specifically requires another default.
 - Check Exam Mode.
 - Check Practice Mode.
 - Ensure only one Check answer button appears.
@@ -79,6 +83,12 @@ Use this checklist before creating another week's quiz.
 - Check mode selector collapse and expansion.
 - Check the back-to-assignments confirmation.
 - Check submission confirmation.
+- Keep the Start over button available.
+- Keep the Start over confirmation hidden on page load.
+- Show the Start over confirmation only after the user clicks Start over.
+- Require confirmation before clearing saved answers.
+- Check both keeping answers and clearing answers.
+- After clearing, return to Question 1 with no saved answers or practice feedback.
 - Do not reveal answers before submission in Exam Mode.
 - Calculate total marks dynamically.
 
@@ -119,6 +129,7 @@ README.md
 - Confirm the question count.
 - Visit every question.
 - Confirm every image loads.
+- Confirm multi-image questions show all of their companion images.
 - Confirm every required audio link appears.
 - Confirm every question has the correct marks.
 - Confirm the original instructions are visible.

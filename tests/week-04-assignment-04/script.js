@@ -1,6 +1,6 @@
 const state = {
   index: 0,
-  mode: 'exam',
+  mode: 'practice',
   answers: JSON.parse(localStorage.getItem('german-week4-answers') || '{}'),
   practice: {}
 };
@@ -122,6 +122,23 @@ $('cancelLeave').addEventListener('click', () => {
 });
 $('confirmLeave').addEventListener('click', () => {
   window.location.href = '../../index.html';
+});
+$('resetQuiz').addEventListener('click', () => {
+  $('resetDialog').hidden = false;
+  $('cancelReset').focus();
+});
+$('cancelReset').addEventListener('click', () => {
+  $('resetDialog').hidden = true;
+});
+$('confirmReset').addEventListener('click', () => {
+  localStorage.removeItem('german-week4-answers');
+  state.answers = {};
+  state.practice = {};
+  state.index = 0;
+  $('resetDialog').hidden = true;
+  $('resultsView').hidden = true;
+  $('quizView').hidden = false;
+  render();
 });
 $('navigatorToggle').addEventListener('click', () => {
   const open = $('navigatorToggle').getAttribute('aria-expanded') === 'true';
