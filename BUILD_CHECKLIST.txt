@@ -1,0 +1,140 @@
+GERMAN I ASSIGNMENT QUIZ BUILD CHECKLIST
+
+Use this checklist before creating another week's quiz.
+
+1. SOURCE VERIFICATION
+- Use the original PDF and original HTML as the source of truth.
+- Inspect every page of the assignment.
+- Check all images, tables, word banks, examples, and instructions.
+- Identify which questions require listening.
+- Do not invent missing questions, answers, options, or vocabulary.
+
+2. QUESTION NUMBERING
+- Preserve the original assignment question numbers.
+- Keep the quiz question number separate from the original blank or sentence number.
+- Preserve skipped numbers caused by examples.
+- Make the progress indicator count only actual answerable questions.
+
+3. EXACT INSTRUCTIONS
+- Copy the full original instructions for every section.
+- Do not replace them with shortened summaries.
+- Preserve details such as:
+  - write only one word;
+  - write only the corresponding letter;
+  - permitted letters;
+  - whether spaces are allowed;
+  - examples;
+  - grammar warnings;
+  - point values;
+  - German instructions where included.
+
+4. QUESTION FORMATS
+- Use text inputs for written answers.
+- Use select menus or choices for multiple-choice questions.
+- Use the required letter format for matching questions.
+- Support sentence ordering choices.
+- Support verb conjugation selections.
+- Support possessive-pronoun answers.
+- Support word-bank completion.
+- Support reading-comprehension questions.
+- Support household-device questions.
+- Include listening questions only with the original public audio.
+- Do not convert every question into one generic format.
+
+5. ORIGINAL IMAGES AND ASSETS
+- Download the correct source images.
+- Check that every image belongs to the correct section.
+- Store images inside that week's folder.
+- Check that images are not cropped or hidden.
+- Add a full-size image link where useful.
+- Verify that every referenced image loads.
+
+6. LISTENING QUESTIONS
+- Confirm the original audio link for every listening section.
+- Check that each link is publicly accessible.
+- Display the correct link for the correct section.
+- Do not replace listening questions with invented text questions.
+- Use the correct instruction for each separate listening section.
+- Keep listening answers separate from non-listening answers.
+
+7. ANSWER KEYS AND GRADING
+- Extract answer keys from the original HTML/PDF.
+- Preserve alternative answers explicitly accepted by the assignment.
+- Support variations such as Koeln and Köln only where appropriate.
+- Ignore unnecessary leading and trailing spaces.
+- Handle German capitalization carefully.
+- Do not accept approximate or invented answers.
+- Mark uncertain answers for manual review instead of guessing.
+- Confirm that marks match the original assignment.
+
+8. QUIZ BEHAVIOR
+- Check Exam Mode.
+- Check Practice Mode.
+- Ensure only one Check answer button appears.
+- Check Previous and Next.
+- Check that answers remain saved while navigating.
+- Check that previous answers reappear.
+- Check the question navigator.
+- Check navigator collapse and expansion.
+- Check mode selector collapse and expansion.
+- Check the back-to-assignments confirmation.
+- Check submission confirmation.
+- Do not reveal answers before submission in Exam Mode.
+- Calculate total marks dynamically.
+
+9. FOLDER SEPARATION
+Each assignment should have its own folder:
+
+tests/
+  week-04-assignment-04/
+  week-05-assignment-05/
+  week-06-assignment-06/
+
+Each assignment folder should contain:
+
+index.html
+questions.js
+script.js
+style.css
+assets/
+README.md
+
+10. LANDING PAGE
+- Add the new week to the root index.html.
+- Link to the correct assignment folder.
+- Keep unavailable weeks labelled Coming soon.
+- Test the link from the landing page.
+
+11. DOCUMENTATION AND EDUCATIONAL NOTICE
+- Describe the project as an unofficial educational practice tool.
+- State that it is not affiliated with or endorsed by the original course provider.
+- Credit third-party material where appropriate.
+- Keep the removal and correction contact note.
+- Do not present the site as an official exam or official course platform.
+- Update the root README.md if the project structure changes.
+- Add an assignment-specific README inside the new week's folder.
+
+12. TESTING BEFORE PUBLISHING
+- Open the new week without JavaScript errors.
+- Confirm the question count.
+- Visit every question.
+- Confirm every image loads.
+- Confirm every required audio link appears.
+- Confirm every question has the correct marks.
+- Confirm the original instructions are visible.
+- Confirm original numbering is preserved.
+- Test Practice feedback.
+- Test final grading.
+- Test the mobile layout.
+- Check for duplicate buttons or controls.
+- Test the landing-page link.
+- Check relative paths for GitHub Pages.
+
+13. FILES NORMALLY UPDATED
+- The new assignment folder under tests/.
+- The root index.html.
+- landing.css only if the landing page needs changes.
+- README.md when documentation or project structure changes.
+
+MOST IMPORTANT RULE
+Verify the entire assignment first. Build the quiz from verified content, not only from a question summary.
