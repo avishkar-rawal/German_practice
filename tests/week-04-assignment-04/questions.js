@@ -35,7 +35,7 @@ const questions = [
     ['wohnst', ['wohnt', 'wohnen', 'wohnst']], ['sprichst', ['sprichst', 'spreche', 'sprechen']], ['wohnen', ['wohnt', 'wohnen', 'wohnst']],
     ['spricht', ['spricht', 'spreche', 'sprechen']], ['wohnt', ['wohnt', 'wohnen', 'wohnst']], ['liest', ['Lest', 'liest', 'lesen']],
     ['sprechen', ['sprichst', 'spreche', 'sprechen']], ['Lest', ['Lest', 'liest', 'lesen']], ['wohnen', ['wohnt', 'wohnen', 'wohnst']], ['kochen', ['kocht', 'koche', 'kochen']]
-  ].map((item, i) => select(i + 37, 'Regular verb conjugation', item[0], `Choose the correct conjugation for item ${i + 1}.`, item[1], 'W4Q9.png', .5)),
+  ].map((item, i) => select(i + 37, 'Regular verb conjugation', item[0], `Choose the correct conjugation for sub-question ${['1(a)', '1(b)', '1(c)', '2(a)', '2(b)', '3', '4', '5', '6', '7', '8', '9', '10'][i]}.`, item[1], 'W4Q9.png', .5)),
   select(50, 'Strong verbs', 'gebe-gibst-gibt-geben-gebt-geben', 'Choose the complete correct conjugation of geben.', ['gebe-gibst-gibt-geben-gebt-geben', 'gebst-gibt-gibe-geben-gebt-geben', 'gebe-gibst-gibt-geben-gebt-geben'], 'W4Q10.1.png'),
   select(51, 'Strong verbs', 'habe-hast-hat-haben-habt-haben', 'Choose the complete correct conjugation of haben.', ['habe-hast-hat-haben-habt-haben', 'habe-habst-habt-haben-habt-haben', 'habe-hast-hat-haben-hat-haben'], 'W4Q10.2.png'),
   select(52, 'Strong verbs', 'nehme-nimmst-nimmt-nehmen-nehmt-nehmen', 'Choose the complete correct conjugation of nehmen.', ['nehme-nihmst-nihmt-nehmen-nihmt-nehmen', 'nehme-nimmst-nimmt-nehmen-nehmt-nehmen', 'nehme-nihmst-nihmt-nehmen-nihmt-nehmen'], 'W4Q10.3.png'),
