@@ -28,7 +28,7 @@ const nonListeningQuestions = [
   ...textGroup(25, 'Modal verbs', ['wollen', 'wollt', 'müssen/muessen', 'Könnt/Koennt', 'will/kann', 'kann', 'kann/muss', 'muss', 'kann'], 'Write the full modal-verb form for item', 'W5Q7.png', 'Write the full word, not an abbreviation.').map(q => ({ ...q, marks: 1 })),
   ...textGroup(34, 'Modal verbs', ['muss', 'können/koennen', 'Willst', 'können/koennen'], 'Fill in the correct modal verb for item', 'W5Q8.png', '', [3, 4, 5, 6]),
   ...textGroup(38, 'Separable verbs', ['kommt', 'an', 'steigen', 'aus', 'gehen', 'weg', 'fährt/faehrt', 'ab', 'schaut', 'an', 'lade', 'ein', 'steht', 'auf', 'ruft', 'an'], 'Complete separable-verb blank', 'W5Q8.png', 'Keep the conjugated verb and prefix in the correct positions.', '', null, 1),
-  ...textGroup(54, 'Verb selection', ['B', 'C', 'D', 'A'], 'Write the corresponding letter for item', 'W5Q10.png', 'Write only A, B, C, or D.'),
+  ...textGroup(54, 'Verb selection', ['B', 'C', 'D', 'A'], 'Write the corresponding letter for item', 'W5Q10.png', 'Write only A, B, C, or D.', [3, 4, 5, 6]),
   ...textGroup(58, 'Akkusativ articles', ['die/den', 'die', 'die', 'das', 'den', 'das', 'die', 'das', 'den'], 'Fill in the correct accusative article for item', 'W5Q11.png', '', [2, 3, 4, 5, 6, 7, 8, 9, 10]),
   ...textGroup(67, 'Akkusativ indefinite articles', ['eine', 'einen', 'ein', 'einen', 'ein', 'einen', 'ein', 'eine', 'Ein'], 'Fill in the correct indefinite article for item', 'W5Q12.png', '', [2, 3, 4, 5, 6, 7, 8, 9, 10]),
   ...textGroup(76, 'mögen or möchten', ['mag', 'möchte/moechte', 'möchtest/moechtest', 'möchten/moechten', 'mögen/moegen'], 'Fill in the correct form for item', 'W5Q13.png', 'Choose the correct form of mögen or möchten.', '', [1, 2, 3, 4, 5])
