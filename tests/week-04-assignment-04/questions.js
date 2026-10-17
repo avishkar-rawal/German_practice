@@ -7,6 +7,7 @@ const select = (id, section, answer, prompt, options, image, marks = 1) =>
 const listening = (id, answer, prompt, image, audio) =>
   ({ id, section: 'Listening', type: 'text', answer, prompt, image, audio, marks: 1,
     companionImage: id < 33 ? 'W4Q7.2.png' : '',
+    example: id < 33 ? 'Example: 1(B) = 65. Do not enter spaces between the digits.' : 'Example: 1. Frank comes from Interlaken. Interlaken is in Switzerland, so the answer is 1. A1c.',
     instruction: id < 33
       ? 'Listen to the Information about phone numbers and write the numbers WITHOUT any spaces between the numbers.'
       : 'Listen to the audio and match the people with places, as shown in the example.' });
@@ -17,7 +18,7 @@ const questions = [
   ...textGroup(10, 'Matching', ['E', 'A', 'D', 'B', 'C'], 'Match item', 'W4Q3.png', '', [1, 2, 3, 4, 5]),
   ...textGroup(15, 'Verb selection', ['B', 'E', 'F', 'A', 'C', 'D'], 'Choose the appropriate verb for sentence', 'W4Q4.png', '', [1, 2, 3, 4, 5, 6]),
   ...textGroup(21, 'Hobbies and activities', ['lernt', 'fotografiert', 'singt', 'tanzen'], 'Write the correctly conjugated verb for item', 'W4Q5.png'),
-  choice(25, 'Sentence ordering', 'bca', 'Bring the jumbled sentence in item 2 into proper order. The example is “bca”.', ['abc', 'cba', 'bca'], 'W4Q6.png'),
+  { ...choice(25, 'Sentence ordering', 'bca', 'Bring the jumbled sentence in item 2 into proper order.', ['abc', 'cba', 'bca'], 'W4Q6.png'), example: 'Example: 1. bca.' },
   choice(26, 'Sentence ordering', 'cba', 'Bring the jumbled sentence in item 3 into proper order.', ['cba', 'abc'], 'W4Q6.png'),
   listening(27, '68354817', 'Listen to the information and enter the number for item 1(A), without spaces.', 'W4Q7.1.png', 'https://drive.google.com/file/d/1Su4o1kWQY3PKBGl3SJ1Yw-SxqQWI39D9/view?usp=sharing'),
   listening(28, '264', 'Listen to the information and enter the number for item 2, without spaces.', 'W4Q7.1.png', 'https://drive.google.com/file/d/1Su4o1kWQY3PKBGl3SJ1Yw-SxqQWI39D9/view?usp=sharing'),
@@ -41,9 +42,9 @@ const questions = [
   select(53, 'Strong verbs', 'schlafe-schläfst-schläft-schlafen-schlaft-schlafen', 'Choose the complete correct conjugation of schlafen.', ['schlafe-schläfst-schläft-schlafen-schlaft-schlafen', 'schlafe-schliefst-schlieft-schlafen-schlaft-schlafen', 'schlafe-schlafst-schlaft-schlafen-schläft-schlafen'], 'W4Q10.4.png'),
   ...textGroup(54, 'Possessive pronouns', ['seine', 'euer', 'meine', 'ihr', 'unsere'], 'Fill in the possessive pronoun for sentence', 'W4Q11.png', 'Possessive pronouns take endings that agree with the noun.').map((q, i) => ({ ...q, marks: 1 })),
   ...textGroup(59, 'Vocabulary categorisation', ['b', 'e', 'a', 'g', 'c', 'd', 'h', 'f'], 'Place word in the correct row; enter its letter for item', 'W4Q12.png'),
-  ...textGroup(67, 'Sentence matching', ['g', 'b', 'e', 'c', 'd', 'a'], 'Match column item with the corresponding letter for item', 'W4Q13.png'),
+  ...textGroup(67, 'Sentence matching', ['g', 'b', 'e', 'c', 'd', 'a'], 'Match column item with the corresponding letter for item', 'W4Q13.png', '', [2, 3, 4, 5, 6, 7]).map((q, i) => ({ ...q, example: i === 0 ? 'Example: item 1. F.' : '' })),
   ...textGroup(73, 'Word-bank completion', ['hoch', 'gibt', 'fahren', 'Park', 'Filme'], 'Complete word-bank blank', 'W4Q14.png').map(q => ({ ...q, marks: 1 })),
-  ...textGroup(78, 'Reading comprehension', ['d', 'e', 'c', 'a'], 'Read the text and enter the section containing the answer to question', 'W4Q15.png', 'Look for the meaning in the reading text, not just an identical word.').map(q => ({ ...q, marks: 1 })),
+  ...textGroup(78, 'Reading comprehension', ['d', 'e', 'c', 'a'], 'Read the text and enter the section containing the answer to question', 'W4Q15.png', 'Look for the meaning in the reading text, not just an identical word.', [2, 3, 4, 5]).map((q, i) => ({ ...q, marks: 1, example: i === 0 ? 'Example: item 1. B.' : '' })),
   ...[
     ['der Staubsauger', ['der Teppich', 'der Staubsauger', 'die Stehlampe']], ['der Fernseher', ['das Radio', 'der Fernseher', 'die Stehlampe']],
     ['das Radio', ['die Stehlampe', 'die Kaffeemaschine', 'das Radio']], ['die Kaffeemaschine', ['die Kaffeemaschine', 'der Teppich', 'der Stuhl']],

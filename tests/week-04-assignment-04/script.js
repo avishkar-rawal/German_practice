@@ -89,6 +89,7 @@ function renderGroup(group) {
     <a class="source-image-link" href="${imagePath(first.image)}" target="_blank" rel="noreferrer" ${first.image ? '' : 'hidden'}>Open full-size original question ↗</a>
     <img class="source-image" src="${imagePath(first.companionImage)}" alt="${first.companionImage ? `Companion original assignment source for questions ${start}-${end}` : ''}" ${first.companionImage ? '' : 'hidden'}>
     <a class="source-image-link" href="${imagePath(first.companionImage)}" target="_blank" rel="noreferrer" ${first.companionImage ? '' : 'hidden'}>Open companion image full size ↗</a>
+    ${first.example ? `<p class="example">${escapeHtml(first.example)}</p>` : ''}
     <div class="subquestion-list"></div>`;
   const list = card.querySelector('.subquestion-list');
   group.forEach(q => list.append(renderQuestion(q, questions.indexOf(q))));

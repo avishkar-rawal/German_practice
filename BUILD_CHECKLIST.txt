@@ -13,6 +13,8 @@ Use this checklist before creating another week's quiz.
 - Preserve the original assignment question numbers.
 - Keep the quiz question number separate from the original blank or sentence number.
 - Preserve skipped numbers caused by examples.
+- Verify every displayed subquestion label against the original worksheet, including sections where item 1 is provided as an example (for example, display 2–5 rather than 1–4).
+- Reproduce every source-provided example in the relevant section, including its completed answer, while keeping the example separate from graded questions.
 - Make the progress indicator count only actual answerable questions.
 
 3. EXACT INSTRUCTIONS
