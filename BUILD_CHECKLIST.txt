@@ -8,6 +8,7 @@ Use this checklist before creating another week's quiz.
 - Check all images, tables, word banks, examples, and instructions.
 - Identify which questions require listening.
 - Do not invent missing questions, answers, options, or vocabulary.
+- Include listening-dependent questions when the original assignment provides a usable public audio link; exclude them only when no usable source audio is available.
 
 2. QUESTION NUMBERING
 - Preserve the original assignment question numbers.
@@ -80,6 +81,7 @@ Use this checklist before creating another week's quiz.
 - Ensure only one Check answer button appears.
 - Check the continuous scrollable question page.
 - Group related subquestions under one shared instruction and image.
+- Do not split a shared group merely because individual subquestions use different audio links; keep audio links on their individual answer rows.
 - Keep one independent Check answer button for every subquestion in Practice Mode.
 - Keep each subquestion number and prompt on one line where the layout allows.
 - Keep each short answer field and its Practice Mode Check answer button on one line.

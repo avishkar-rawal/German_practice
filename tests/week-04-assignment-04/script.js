@@ -64,7 +64,7 @@ function renderQuestion(q, index) {
   return item;
 }
 function groupKey(q) {
-  return [q.section, q.instruction || instructions[q.section] || '', q.image || '', q.companionImage || '', q.audio || ''].join('|');
+  return [q.section, q.instruction || instructions[q.section] || '', q.image || '', q.companionImage || ''].join('|');
 }
 function questionGroups() {
   return questions.reduce((groups, q) => {

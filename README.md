@@ -53,6 +53,7 @@ Open the root `index.html` file in a browser, or serve the folder with any local
 index.html                         Assignment-selection page
 landing.css                        Landing-page styles
 tests/week-04-assignment-04/       Week 4 practice test
+tests/week-05-assignment-05/       Week 5 practice test
   index.html                        Test page
   questions.js                      Question data
   script.js                         Quiz behaviour

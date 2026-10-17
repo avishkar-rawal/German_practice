@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>German I — Week 5 Assignment 5</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .layout { display: block; }
+    .question-list { max-width: 900px; margin: 0 auto; }
+    .subquestion-list { display: flex; flex-direction: column; gap: 18px; }
+    .question-item { border-top: 1px solid #edf0eb; padding-top: 18px; }
+    .question-item:first-child { border-top: 0; padding-top: 0; }
+    .subquestion-meta { display: flex; align-items: center; gap: 10px; color: #24472c; }
+    .subquestion-meta strong { margin-right: auto; }
+    .subquestion-meta b { color: #54745a; background: #edf5eb; padding: 5px 9px; border-radius: 20px; font-size: 12px; }
+    .subquestion-meta strong span { font-weight: 500; color: #2e3d33; }
+    .example { margin: 0 0 14px; color: #6f5b2e; font-style: italic; }
+    .answer-area { display: flex; align-items: center; gap: 12px; }
+    .answer-area .answer-input { flex: 1; width: auto; min-width: 0; }
+    .practice-controls { display: flex; align-items: center; margin-left: auto; }
+    .practice-controls .small { margin-top: 0; white-space: nowrap; }
+    .feedback { position: relative; padding-right: 42px; }
+    .feedback-close { position: absolute; top: 8px; right: 10px; border: 0; background: transparent; color: currentColor; font-size: 22px; line-height: 1; cursor: pointer; padding: 2px 6px; }
+    .feedback-close:hover { opacity: .7; }
+    .feedback-close:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 4px; }
+    .navigator { position: fixed; top: 20px; right: 24px; width: 300px; max-height: calc(100vh - 40px); z-index: 5; }
+    .navigator:not(.is-collapsed) #navigatorBody { max-height: calc(100vh - 104px); overflow-y: auto; }
+    .navigator.is-collapsed { width: auto; }
+    .navigator.is-collapsed .navigator-toggle { white-space: nowrap; }
+    .navigator.is-collapsed .navigator-toggle span small,
+    .navigator.is-collapsed .navigator-toggle > b { display: none; }
+    @media (max-width: 800px) {
+      .navigator { top: 12px; right: 12px; width: min(300px, calc(100vw - 24px)); max-height: calc(100vh - 24px); }
+      .navigator:not(.is-collapsed) #navigatorBody { max-height: calc(100vh - 88px); }
+      .question-list { max-width: none; }
+      .subquestion-meta { align-items: flex-start; }
+      .subquestion-meta strong { line-height: 1.45; }
+      .answer-area { align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <button class="back-link" id="backToAssignments">← All assignments</button>
+      <div class="eyebrow">NPTEL · German I</div>
+      <h1>Week 5: Assignment 5</h1>
+      <p class="subtitle">Practice all questions from the original assignment, including its listening sections.</p>
+      <div class="mode-picker" id="modePicker">
+        <button class="mode-toggle" id="modeToggle" aria-expanded="true">Mode: <strong id="modeLabel">Practice</strong><span aria-hidden="true">⌃</span></button>
+        <div class="mode-switch" id="modeSwitch" role="tablist" aria-label="Quiz mode">
+          <button data-mode="exam">Exam mode</button>
+          <button class="active" data-mode="practice">Practice mode</button>
+        </div>
+      </div>
+      <button class="reset-button" id="resetQuiz">Start over</button>
+    </header>
+    <main class="layout" id="quizView">
+      <section class="question-list" id="questionList"></section>
+      <aside class="card navigator" id="navigator">
+        <button class="navigator-toggle" id="navigatorToggle" aria-expanded="true">
+          <span><strong>Question navigator</strong><small id="answeredCount"></small></span><b aria-hidden="true">⌃</b>
+        </button>
+        <div id="navigatorBody">
+          <div class="question-grid" id="questionGrid"></div>
+          <div class="legend"><span><i class="dot current-dot"></i>Current</span><span><i class="dot answered-dot"></i>Answered</span></div>
+          <div class="notice"><b>90 questions included</b><br>Listening questions open their original public audio links.</div>
+        </div>
+      </aside>
+    </main>
+    <div class="submit-bar" id="submitBar"><button class="primary" id="submitButton">Submit assignment</button></div>
+    <main class="card results" id="resultsView" hidden></main>
+  </div>
+  <div class="confirm-overlay" id="leaveDialog" hidden>
+    <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="leaveTitle">
+      <h2 id="leaveTitle">Return to assignments?</h2>
+      <p>Your answers are saved in this browser, but the current quiz page will close.</p>
+      <div class="confirm-actions">
+        <button class="secondary" id="cancelLeave">No, stay here</button>
+        <button class="primary" id="confirmLeave">Yes, go back</button>
+      </div>
+    </div>
+  </div>
+  <div class="confirm-overlay" id="resetDialog" hidden>
+    <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+      <h2 id="resetTitle">Start the quiz over?</h2>
+      <p>This will permanently remove all saved answers for this assignment from this browser.</p>
+      <div class="confirm-actions">
+        <button class="secondary" id="cancelReset">No, keep my answers</button>
+        <button class="primary" id="confirmReset">Yes, clear answers</button>
+      </div>
+    </div>
+  </div>
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
