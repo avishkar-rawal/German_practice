@@ -75,7 +75,14 @@ Use this checklist before creating another week's quiz.
 - Check Exam Mode.
 - Check Practice Mode.
 - Ensure only one Check answer button appears.
-- Check Previous and Next.
+- Check the continuous scrollable question page.
+- Group related subquestions under one shared instruction and image.
+- Keep one independent Check answer button for every subquestion in Practice Mode.
+- Keep each subquestion number and prompt on one line where the layout allows.
+- Keep each short answer field and its Practice Mode Check answer button on one line.
+- Check that the question navigator scrolls to the selected question.
+- Keep the navigator fixed in the top-right corner while scrolling.
+- Check that the collapsed navigator remains a small Question navigator button.
 - Check that answers remain saved while navigating.
 - Check that previous answers reappear.
 - Check the question navigator.

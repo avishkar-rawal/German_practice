@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>German I — Week 4 Assignment 4</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .layout { display: block; }
+    .question-list { max-width: 900px; margin: 0 auto; }
+    .subquestion-list { display: flex; flex-direction: column; gap: 18px; }
+    .question-item { border-top: 1px solid #edf0eb; padding-top: 18px; }
+    .question-item:first-child { border-top: 0; padding-top: 0; }
+    .subquestion-meta { display: flex; align-items: center; gap: 10px; color: #24472c; }
+    .subquestion-meta strong { margin-right: auto; }
+    .subquestion-meta b { color: #54745a; background: #edf5eb; padding: 5px 9px; border-radius: 20px; font-size: 12px; }
+    .subquestion-meta strong span { font-weight: 500; color: #2e3d33; }
+    .answer-area { display: flex; align-items: center; gap: 12px; }
+    .answer-area .answer-input { width: min(100%, 260px); }
+    .practice-controls { display: flex; align-items: center; }
+    .practice-controls .small { margin-top: 0; white-space: nowrap; }
+    .navigator { position: fixed; top: 20px; right: 24px; width: 300px; z-index: 5; }
+    .navigator.is-collapsed { width: auto; }
+    .navigator.is-collapsed .navigator-toggle { white-space: nowrap; }
+    .navigator.is-collapsed .navigator-toggle span small,
+    .navigator.is-collapsed .navigator-toggle > b { display: none; }
+    @media (max-width: 800px) {
+      .navigator { top: 12px; right: 12px; width: min(300px, calc(100vw - 24px)); }
+      .question-list { max-width: none; }
+      .subquestion-meta { align-items: flex-start; }
+      .subquestion-meta strong { line-height: 1.45; }
+      .answer-area { align-items: stretch; }
+    }
+  </style>
 </head>
 <body>
   <div class="app">
@@ -23,22 +50,7 @@
       <button class="reset-button" id="resetQuiz">Start over</button>
     </header>
     <main class="layout" id="quizView">
-      <section class="card question-card">
-        <div class="question-meta"><span id="sectionLabel"></span><strong id="progressLabel"></strong><b id="marksLabel"></b></div>
-        <div class="progress"><span id="progressBar"></span></div>
-        <h2 id="questionTitle"></h2>
-        <p id="instruction" class="instruction"></p>
-        <img id="sourceImage" class="source-image" alt="">
-        <a id="sourceImageLink" class="source-image-link" target="_blank" rel="noreferrer">Open full-size original question ↗</a>
-        <img id="sourceImageSecondary" class="source-image" alt="" hidden>
-        <a id="sourceImageSecondaryLink" class="source-image-link" target="_blank" rel="noreferrer" hidden>Open companion image full size ↗</a>
-        <p id="prompt" class="prompt"></p>
-        <a id="audioLink" class="audio-link" target="_blank" rel="noreferrer">Open the original listening audio ↗</a>
-        <div id="answerArea"></div>
-        <div id="practiceControls"></div>
-        <div id="feedback" class="feedback" hidden></div>
-        <div class="nav"><button class="secondary" id="previousButton">← Previous</button><button class="primary" id="nextButton">Next →</button></div>
-      </section>
+      <section class="question-list" id="questionList"></section>
       <aside class="card navigator" id="navigator">
         <button class="navigator-toggle" id="navigatorToggle" aria-expanded="true">
           <span><strong>Question navigator</strong><small id="answeredCount"></small></span><b aria-hidden="true">⌃</b>
@@ -50,6 +62,7 @@
         </div>
       </aside>
     </main>
+    <div class="submit-bar" id="submitBar"><button class="primary" id="submitButton">Submit assignment</button></div>
     <main class="card results" id="resultsView" hidden></main>
   </div>
   <div class="confirm-overlay" id="leaveDialog" hidden>

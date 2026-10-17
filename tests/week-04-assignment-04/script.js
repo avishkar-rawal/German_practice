@@ -1,5 +1,4 @@
 const state = {
-  index: 0,
   mode: 'practice',
   answers: JSON.parse(localStorage.getItem('german-week4-answers') || '{}'),
   practice: {}
@@ -30,69 +29,100 @@ const instructions = {
 function save() {
   localStorage.setItem('german-week4-answers', JSON.stringify(state.answers));
 }
-function renderGrid() {
-  $('questionGrid').innerHTML = questions.map((q, i) => `<button class="${i === state.index ? 'current ' : ''}${state.answers[q.id]?.trim() ? 'answered' : ''}" data-index="${i}">${q.id}</button>`).join('');
-  $('questionGrid').querySelectorAll('button').forEach(button => button.addEventListener('click', () => { state.index = Number(button.dataset.index); render(); }));
-  $('answeredCount').textContent = `${questions.filter(q => state.answers[q.id]?.trim()).length}/${questions.length} answered`;
+function answerMarkup(q) {
+  if (q.type === 'text') return `<input class="answer-input" id="answer-${q.id}" value="${escapeHtml(state.answers[q.id] || '')}" placeholder="Type your answer…">`;
+  return `<select class="answer-input" id="answer-${q.id}"><option value="">Choose an answer…</option>${q.options.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join('')}</select>`;
 }
-function render() {
-  const q = questions[state.index];
-  $('sectionLabel').textContent = q.section;
-  $('progressLabel').textContent = `Question ${state.index + 1} of ${questions.length}`;
-  $('marksLabel').textContent = `${q.marks} ${q.marks === 1 ? 'mark' : 'marks'}`;
-  $('progressBar').style.width = `${((state.index + 1) / questions.length) * 100}%`;
-  $('questionTitle').textContent = `Original item ${q.id}`;
-  $('instruction').textContent = q.instruction || instructions[q.section] || '';
-  const image = $('sourceImage');
-  image.src = imagePath(q.image);
-  image.alt = `Original assignment source for question ${q.id}`;
-  image.hidden = !q.image;
-  const imageLink = $('sourceImageLink');
-  imageLink.hidden = !q.image;
-  imageLink.href = imagePath(q.image);
-  const secondaryImage = $('sourceImageSecondary');
-  const secondaryImageLink = $('sourceImageSecondaryLink');
-  secondaryImage.src = imagePath(q.companionImage);
-  secondaryImage.alt = q.companionImage ? `Companion original assignment source for question ${q.id}` : '';
-  secondaryImage.hidden = !q.companionImage;
-  secondaryImageLink.hidden = !q.companionImage;
-  secondaryImageLink.href = imagePath(q.companionImage);
-  $('prompt').textContent = q.prompt;
-  const audio = $('audioLink');
-  audio.hidden = !q.audio;
-  if (q.audio) audio.href = q.audio;
-  $('answerArea').innerHTML = q.type === 'text'
-    ? `<input class="answer-input" id="answerInput" value="${escapeHtml(state.answers[q.id] || '')}" placeholder="Type your answer…">`
-    : `<select class="answer-input" id="answerInput"><option value="">Choose an answer…</option>${q.options.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join('')}</select>`;
-  if (q.type !== 'text') $('answerInput').value = state.answers[q.id] || '';
-  $('answerInput').addEventListener('input', e => { state.answers[q.id] = e.target.value; save(); renderGrid(); });
-  const practiceControls = $('practiceControls');
-  practiceControls.innerHTML = '';
+function renderQuestion(q, index) {
+  const item = document.createElement('div');
+  item.className = 'question-item';
+  item.id = `question-${q.id}`;
+  item.innerHTML = `
+    <div class="subquestion-meta"><strong>Question ${q.id}: <span>${escapeHtml(q.prompt)}</span></strong><b>${q.marks} ${q.marks === 1 ? 'mark' : 'marks'}</b></div>
+    <a class="audio-link" href="${q.audio || '#'}" target="_blank" rel="noreferrer" ${q.audio ? '' : 'hidden'}>Open the original listening audio ↗</a>
+    <div class="answer-area">${answerMarkup(q)}<div class="practice-controls"></div></div>
+    <div class="feedback" hidden></div>`;
+  const input = item.querySelector(`#answer-${q.id}`);
+  if (q.type !== 'text') input.value = state.answers[q.id] || '';
+  input.addEventListener('input', event => {
+    state.answers[q.id] = event.target.value;
+    save();
+    renderGrid();
+  });
+  const controls = item.querySelector('.practice-controls');
   if (state.mode === 'practice') {
     const button = document.createElement('button');
     button.className = 'primary small';
-    button.id = 'checkButton';
     button.textContent = 'Check answer';
     button.addEventListener('click', () => {
       state.practice[q.id] = true;
-      showFeedback(q);
+      showFeedback(q, item);
     });
-    practiceControls.append(button);
+    controls.append(button);
   }
-  $('feedback').hidden = true;
-  if (state.mode === 'practice' && state.practice[q.id]) showFeedback(q);
-  $('previousButton').disabled = state.index === 0;
-  $('nextButton').textContent = state.index === questions.length - 1 ? 'Submit assignment' : 'Next →';
-  renderGrid();
+  if (state.mode === 'practice' && state.practice[q.id]) showFeedback(q, item);
+  return item;
 }
-function showFeedback(q) {
-  const feedback = $('feedback');
+function groupKey(q) {
+  return [q.section, q.instruction || instructions[q.section] || '', q.image || '', q.companionImage || '', q.audio || ''].join('|');
+}
+function questionGroups() {
+  return questions.reduce((groups, q) => {
+    const previous = groups[groups.length - 1];
+    if (previous && groupKey(previous[previous.length - 1]) === groupKey(q)) previous.push(q);
+    else groups.push([q]);
+    return groups;
+  }, []);
+}
+function renderGroup(group) {
+  const first = group[0];
+  const start = questions.indexOf(first) + 1;
+  const end = start + group.length - 1;
+  const card = document.createElement('article');
+  card.className = 'card question-card';
+  card.innerHTML = `
+    <div class="question-meta"><span>${escapeHtml(first.section)}</span><strong>Questions ${start}-${end} of ${questions.length}</strong><b>${group.reduce((sum, q) => sum + q.marks, 0).toFixed(1)} marks</b></div>
+    <div class="progress"><span style="width:${(end / questions.length) * 100}%"></span></div>
+    <h2>Original item${group.length > 1 ? 's' : ''} ${group.map(q => q.id).join(', ')}</h2>
+    <p class="instruction">${escapeHtml(first.instruction || instructions[first.section] || '')}</p>
+    <img class="source-image" src="${imagePath(first.image)}" alt="Original assignment source for questions ${start}-${end}" ${first.image ? '' : 'hidden'}>
+    <a class="source-image-link" href="${imagePath(first.image)}" target="_blank" rel="noreferrer" ${first.image ? '' : 'hidden'}>Open full-size original question ↗</a>
+    <img class="source-image" src="${imagePath(first.companionImage)}" alt="${first.companionImage ? `Companion original assignment source for questions ${start}-${end}` : ''}" ${first.companionImage ? '' : 'hidden'}>
+    <a class="source-image-link" href="${imagePath(first.companionImage)}" target="_blank" rel="noreferrer" ${first.companionImage ? '' : 'hidden'}>Open companion image full size ↗</a>
+    <div class="subquestion-list"></div>`;
+  const list = card.querySelector('.subquestion-list');
+  group.forEach(q => list.append(renderQuestion(q, questions.indexOf(q))));
+  return card;
+}
+function showFeedback(q, card) {
+  const feedback = card.querySelector('.feedback');
   const isRight = correct(q);
   feedback.hidden = false;
   feedback.className = `feedback ${isRight ? 'right' : 'wrong'}`;
-  feedback.innerHTML = `<strong>${isRight ? 'Correct!' : 'Not quite.'}</strong><span>Correct answer: <b>${Array.isArray(q.answer) ? q.answer.join(' / ') : q.answer}</b></span>${q.explanation ? `<span>${q.explanation}</span>` : ''}${!isRight ? '<button class="link-button" id="retry">Retry this question</button>' : ''}`;
-  const retry = $('retry');
-  if (retry) retry.addEventListener('click', () => { state.answers[q.id] = ''; state.practice[q.id] = false; render(); });
+  feedback.innerHTML = `<strong>${isRight ? 'Correct!' : 'Not quite.'}</strong><span>Correct answer: <b>${escapeHtml(Array.isArray(q.answer) ? q.answer.join(' / ') : q.answer)}</b></span>${q.explanation ? `<span>${escapeHtml(q.explanation)}</span>` : ''}${!isRight ? '<button class="link-button retry" type="button">Retry this question</button>' : ''}`;
+  const retry = feedback.querySelector('.retry');
+  if (retry) retry.addEventListener('click', () => {
+    state.answers[q.id] = '';
+    state.practice[q.id] = false;
+    save();
+    render();
+    document.getElementById(`question-${q.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+function renderGrid() {
+  $('questionGrid').innerHTML = questions.map((q, i) => `<button class="${state.answers[q.id]?.trim() ? 'answered' : ''}" data-index="${i}">${q.id}</button>`).join('');
+  $('questionGrid').querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+    document.getElementById(`question-${questions[Number(button.dataset.index)].id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+  $('answeredCount').textContent = `${questions.filter(q => state.answers[q.id]?.trim()).length}/${questions.length} answered`;
+}
+function render() {
+  $('modeLabel').textContent = state.mode === 'exam' ? 'Exam' : 'Practice';
+  document.querySelectorAll('[data-mode]').forEach(item => item.classList.toggle('active', item.dataset.mode === state.mode));
+  $('questionList').innerHTML = '';
+  questionGroups().forEach(group => $('questionList').append(renderGroup(group)));
+  $('submitBar').hidden = false;
+  renderGrid();
 }
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[character]));
@@ -102,10 +132,16 @@ function showResults() {
   const score = questions.reduce((sum, q) => sum + (correct(q) ? q.marks : 0), 0);
   const percent = Math.round(score / total * 100);
   $('quizView').hidden = true;
+  $('submitBar').hidden = true;
   const results = $('resultsView');
   results.hidden = false;
-  results.innerHTML = `<div class="score"><strong>${score.toFixed(1)}</strong><span>/ ${total.toFixed(1)} marks</span><em>${percent}%</em></div><div class="result-stats"><span><b>${questions.filter(correct).length}</b> correct</span><span><b>${questions.filter(q => state.answers[q.id]?.trim() && !correct(q)).length}</b> incorrect</span><span><b>${questions.filter(q => !state.answers[q.id]?.trim()).length}</b> unanswered</span></div><h2>Answer review</h2><div class="review-list">${questions.map(q => `<div class="review ${correct(q) ? 'right' : 'wrong'}"><b>${q.id}</b><span>${q.prompt}</span><span>Your answer: ${escapeHtml(state.answers[q.id] || '—')}</span>${!correct(q) ? `<span>Correct: ${escapeHtml(Array.isArray(q.answer) ? q.answer.join(' / ') : q.answer)}</span>` : ''}</div>`).join('')}</div><button class="primary" id="returnButton">Return to quiz</button>`;
-  $('returnButton').addEventListener('click', () => { results.hidden = true; $('quizView').hidden = false; render(); });
+  results.innerHTML = `<div class="score"><strong>${score.toFixed(1)}</strong><span>/ ${total.toFixed(1)} marks</span><em>${percent}%</em></div><div class="result-stats"><span><b>${questions.filter(correct).length}</b> correct</span><span><b>${questions.filter(q => state.answers[q.id]?.trim() && !correct(q)).length}</b> incorrect</span><span><b>${questions.filter(q => !state.answers[q.id]?.trim()).length}</b> unanswered</span></div><h2>Answer review</h2><div class="review-list">${questions.map(q => `<div class="review ${correct(q) ? 'right' : 'wrong'}"><b>${q.id}</b><span>${escapeHtml(q.prompt)}</span><span>Your answer: ${escapeHtml(state.answers[q.id] || '—')}</span>${!correct(q) ? `<span>Correct: ${escapeHtml(Array.isArray(q.answer) ? q.answer.join(' / ') : q.answer)}</span>` : ''}</div>`).join('')}</div><button class="primary" id="returnButton">Return to quiz</button>`;
+  $('returnButton').addEventListener('click', () => {
+    results.hidden = true;
+    $('quizView').hidden = false;
+    $('submitBar').hidden = false;
+    render();
+  });
 }
 $('modeToggle').addEventListener('click', () => {
   const open = $('modeToggle').getAttribute('aria-expanded') === 'true';
@@ -117,46 +153,35 @@ $('backToAssignments').addEventListener('click', () => {
   $('leaveDialog').hidden = false;
   $('cancelLeave').focus();
 });
-$('cancelLeave').addEventListener('click', () => {
-  $('leaveDialog').hidden = true;
-});
-$('confirmLeave').addEventListener('click', () => {
-  window.location.href = '../../index.html';
-});
+$('cancelLeave').addEventListener('click', () => { $('leaveDialog').hidden = true; });
+$('confirmLeave').addEventListener('click', () => { window.location.href = '../../index.html'; });
 $('resetQuiz').addEventListener('click', () => {
   $('resetDialog').hidden = false;
   $('cancelReset').focus();
 });
-$('cancelReset').addEventListener('click', () => {
-  $('resetDialog').hidden = true;
-});
+$('cancelReset').addEventListener('click', () => { $('resetDialog').hidden = true; });
 $('confirmReset').addEventListener('click', () => {
   localStorage.removeItem('german-week4-answers');
   state.answers = {};
   state.practice = {};
-  state.index = 0;
   $('resetDialog').hidden = true;
   $('resultsView').hidden = true;
   $('quizView').hidden = false;
   render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 $('navigatorToggle').addEventListener('click', () => {
   const open = $('navigatorToggle').getAttribute('aria-expanded') === 'true';
   $('navigatorToggle').setAttribute('aria-expanded', String(!open));
   $('navigatorBody').hidden = open;
   $('navigatorToggle').lastElementChild.textContent = open ? '⌄' : '⌃';
-  $('quizView').classList.toggle('navigator-collapsed', open);
+  $('navigator').classList.toggle('is-collapsed', open);
 });
 document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
   state.mode = button.dataset.mode;
-  $('modeLabel').textContent = state.mode === 'exam' ? 'Exam' : 'Practice';
-  document.querySelectorAll('[data-mode]').forEach(item => item.classList.toggle('active', item === button));
   render();
 }));
-$('previousButton').addEventListener('click', () => { state.index--; render(); });
-$('nextButton').addEventListener('click', () => {
-  if (state.index === questions.length - 1) {
-    if (confirm('Submit your answers now? You will see your score and corrections.')) showResults();
-  } else { state.index++; render(); }
+$('submitButton').addEventListener('click', () => {
+  if (confirm('Submit your answers now? You will see your score and corrections.')) showResults();
 });
 render();
