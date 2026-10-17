@@ -31,7 +31,17 @@ const nonListeningQuestions = [
   ...textGroup(54, 'Verb selection', ['B', 'C', 'D', 'A'], 'Write the corresponding letter for item', 'W5Q10.png', 'Write only A, B, C, or D.', [3, 4, 5, 6]),
   ...textGroup(58, 'Akkusativ articles', ['die/den', 'die', 'die', 'das', 'den', 'das', 'die', 'das', 'den'], 'Fill in the correct accusative article for item', 'W5Q11.png', '', [2, 3, 4, 5, 6, 7, 8, 9, 10]),
   ...textGroup(67, 'Akkusativ indefinite articles', ['eine', 'einen', 'ein', 'einen', 'ein', 'einen', 'ein', 'eine', 'Ein'], 'Fill in the correct indefinite article for item', 'W5Q12.png', '', [2, 3, 4, 5, 6, 7, 8, 9, 10]),
-  ...textGroup(76, 'mögen or möchten', ['mag', 'möchte/moechte', 'möchtest/moechtest', 'möchten/moechten', 'mögen/moegen'], 'Fill in the correct form for item', 'W5Q13.png', 'Choose the correct form of mögen or möchten.', '', [1, 2, 3, 4, 5])
+  ...textGroup(76, 'mögen or möchten', ['mag', 'möchte/moechte', 'möchtest/moechtest', 'möchten/moechten', 'mögen/moegen'], 'Fill in the correct form for item', 'W5Q13.png', 'Choose the correct form of mögen or möchten.', '', [1, 2, 3, 4, 5]).map((q, i) => ({
+    ...q,
+    marks: 1,
+    prompt: [
+      'Ich ______________ Literatur.',
+      'Paula _______________ einen neuen Laptop kaufen.',
+      '_________________ du eine Tasse Kaffee?',
+      'Wir _________________ heute Abend ins Kino gehen.',
+      'Meine Eltern _______________ klassische Musik.'
+    ][i]
+  }))
 ];
 
 nonListeningQuestions.slice(0, 5).forEach(q => { q.companionImage = 'W5Q3.1.png'; });
