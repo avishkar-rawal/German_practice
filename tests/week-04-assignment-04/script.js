@@ -99,7 +99,11 @@ function showFeedback(q, card) {
   const isRight = correct(q);
   feedback.hidden = false;
   feedback.className = `feedback ${isRight ? 'right' : 'wrong'}`;
-  feedback.innerHTML = `<strong>${isRight ? 'Correct!' : 'Not quite.'}</strong><span>Correct answer: <b>${escapeHtml(Array.isArray(q.answer) ? q.answer.join(' / ') : q.answer)}</b></span>${q.explanation ? `<span>${escapeHtml(q.explanation)}</span>` : ''}${!isRight ? '<button class="link-button retry" type="button">Retry this question</button>' : ''}`;
+  feedback.innerHTML = `<button class="feedback-close" type="button" aria-label="Close answer feedback">×</button><strong>${isRight ? 'Correct!' : 'Not quite.'}</strong><span>Correct answer: <b>${escapeHtml(Array.isArray(q.answer) ? q.answer.join(' / ') : q.answer)}</b></span>${q.explanation ? `<span>${escapeHtml(q.explanation)}</span>` : ''}${!isRight ? '<button class="link-button retry" type="button">Retry this question</button>' : ''}`;
+  feedback.querySelector('.feedback-close').addEventListener('click', () => {
+    state.practice[q.id] = false;
+    feedback.hidden = true;
+  });
   const retry = feedback.querySelector('.retry');
   if (retry) retry.addEventListener('click', () => {
     state.answers[q.id] = '';

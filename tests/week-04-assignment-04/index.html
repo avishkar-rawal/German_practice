@@ -16,9 +16,13 @@
     .subquestion-meta b { color: #54745a; background: #edf5eb; padding: 5px 9px; border-radius: 20px; font-size: 12px; }
     .subquestion-meta strong span { font-weight: 500; color: #2e3d33; }
     .answer-area { display: flex; align-items: center; gap: 12px; }
-    .answer-area .answer-input { width: min(100%, 260px); }
-    .practice-controls { display: flex; align-items: center; }
+    .answer-area .answer-input { flex: 1; width: auto; min-width: 0; }
+    .practice-controls { display: flex; align-items: center; margin-left: auto; }
     .practice-controls .small { margin-top: 0; white-space: nowrap; }
+    .feedback { position: relative; padding-right: 42px; }
+    .feedback-close { position: absolute; top: 8px; right: 10px; border: 0; background: transparent; color: currentColor; font-size: 22px; line-height: 1; cursor: pointer; padding: 2px 6px; }
+    .feedback-close:hover { opacity: .7; }
+    .feedback-close:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 4px; }
     .navigator { position: fixed; top: 20px; right: 24px; width: 300px; z-index: 5; }
     .navigator.is-collapsed { width: auto; }
     .navigator.is-collapsed .navigator-toggle { white-space: nowrap; }

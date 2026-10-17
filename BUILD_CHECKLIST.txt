@@ -80,6 +80,8 @@ Use this checklist before creating another week's quiz.
 - Keep one independent Check answer button for every subquestion in Practice Mode.
 - Keep each subquestion number and prompt on one line where the layout allows.
 - Keep each short answer field and its Practice Mode Check answer button on one line.
+- Make short-answer fields use the available row width while keeping Check answer on the right.
+- Provide a close control for Practice Mode feedback and correct-answer panels.
 - Check that the question navigator scrolls to the selected question.
 - Keep the navigator fixed in the top-right corner while scrolling.
 - Check that the collapsed navigator remains a small Question navigator button.
