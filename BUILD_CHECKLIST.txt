@@ -85,6 +85,8 @@ Use this checklist before creating another week's quiz.
 - Check that the question navigator scrolls to the selected question.
 - Keep the navigator fixed in the top-right corner while scrolling.
 - Check that the collapsed navigator remains a small Question navigator button.
+- Make the expanded navigator contents vertically scrollable within the viewport.
+- Check the navigator on short and mobile-height screens.
 - Check that answers remain saved while navigating.
 - Check that previous answers reappear.
 - Check the question navigator.

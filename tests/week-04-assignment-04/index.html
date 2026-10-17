@@ -23,13 +23,15 @@
     .feedback-close { position: absolute; top: 8px; right: 10px; border: 0; background: transparent; color: currentColor; font-size: 22px; line-height: 1; cursor: pointer; padding: 2px 6px; }
     .feedback-close:hover { opacity: .7; }
     .feedback-close:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 4px; }
-    .navigator { position: fixed; top: 20px; right: 24px; width: 300px; z-index: 5; }
+    .navigator { position: fixed; top: 20px; right: 24px; width: 300px; max-height: calc(100vh - 40px); z-index: 5; }
+    .navigator:not(.is-collapsed) #navigatorBody { max-height: calc(100vh - 104px); overflow-y: auto; }
     .navigator.is-collapsed { width: auto; }
     .navigator.is-collapsed .navigator-toggle { white-space: nowrap; }
     .navigator.is-collapsed .navigator-toggle span small,
     .navigator.is-collapsed .navigator-toggle > b { display: none; }
     @media (max-width: 800px) {
-      .navigator { top: 12px; right: 12px; width: min(300px, calc(100vw - 24px)); }
+      .navigator { top: 12px; right: 12px; width: min(300px, calc(100vw - 24px)); max-height: calc(100vh - 24px); }
+      .navigator:not(.is-collapsed) #navigatorBody { max-height: calc(100vh - 88px); }
       .question-list { max-width: none; }
       .subquestion-meta { align-items: flex-start; }
       .subquestion-meta strong { line-height: 1.45; }
